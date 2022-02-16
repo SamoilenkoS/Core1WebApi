@@ -29,7 +29,15 @@ namespace Core1WebApi.Controllers
         {
             if(user != null)
             {
-                var createdGuid = _userService.AddUser(user);
+                Guid createdGuid;
+                try
+                {
+                    createdGuid = _userService.AddUser(user);
+                }
+                catch(ArgumentException ex)
+                {
+                    return BadRequest(ex.Message);
+                }
 
                 return Created(createdGuid.ToString(), user);
             }

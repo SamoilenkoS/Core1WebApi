@@ -22,6 +22,11 @@ namespace CoreBL
 
         public Guid AddUser(User user)
         {
+            if (!char.IsUpper(user.FirstName[0]))
+            {
+                throw new ArgumentException("Name should starts with upper-case!");
+            }
+
             var dbUser = _mapper.Map<UserDto>(user);
 
             return _userRepository.Add(dbUser);
