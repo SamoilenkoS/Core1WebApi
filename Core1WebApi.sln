@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core1WebApi", "Core1WebApi\Core1WebApi.csproj", "{343D196C-E759-4F65-9C80-9642A88C9743}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core1WebApi", "Core1WebApi\Core1WebApi.csproj", "{343D196C-E759-4F65-9C80-9642A88C9743}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreDAL", "CoreDAL\CoreDAL.csproj", "{A3D8A251-F4F9-4D72-AC3A-B32348E577EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreBL", "CoreBL\CoreBL.csproj", "{A292F5EE-6A66-4998-A348-2CB219A7608A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{343D196C-E759-4F65-9C80-9642A88C9743}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{343D196C-E759-4F65-9C80-9642A88C9743}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{343D196C-E759-4F65-9C80-9642A88C9743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D8A251-F4F9-4D72-AC3A-B32348E577EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D8A251-F4F9-4D72-AC3A-B32348E577EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D8A251-F4F9-4D72-AC3A-B32348E577EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D8A251-F4F9-4D72-AC3A-B32348E577EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A292F5EE-6A66-4998-A348-2CB219A7608A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A292F5EE-6A66-4998-A348-2CB219A7608A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A292F5EE-6A66-4998-A348-2CB219A7608A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A292F5EE-6A66-4998-A348-2CB219A7608A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

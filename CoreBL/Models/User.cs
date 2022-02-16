@@ -18,6 +18,6 @@ namespace Core1WebApi.Models
         [MaxLength(20)]
         public string LastName { get; set; }
         [Required]
-        public DateTime BirthDate { get; set; }
+        public string BirthDate { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core1WebApi.Models;
+using CoreBL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,40 +13,41 @@ namespace Core1WebApi.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private static List<User> _users;
+        private readonly UserService _userService;
         private readonly ILogger<UsersController> _logger;
 
-        static UsersController()
-        {
-            _users = new List<User>();
-        }
-
         public UsersController(
-            ILogger<UsersController> logger)
+            ILogger<UsersController> logger,
+            UserService userService)
         {
             _logger = logger;
+            _userService = userService;
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult AddUser(User user)
         {
-            user.Id = Guid.NewGuid();
-            _users.Add(user);
+            if(user != null)
+            {
+                var createdGuid = _userService.AddUser(user);
 
-            return Created(user.Id.ToString(), user);
+                return Created(createdGuid.ToString(), user);
+            }
+
+            return BadRequest();
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public IActionResult GetAllUsers()
         {
-            return Ok(_users);
+            return Ok(_userService.GetAllUsers());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
-            User user = _users.FirstOrDefault(user => user.Id == id);
-            if(user != null)
+            var user = _userService.GetUserById(id);
+            if (user != null)
             {
                 return Ok(user);
             }
@@ -56,32 +58,16 @@ namespace Core1WebApi.Controllers
         [HttpPut]
         public IActionResult UpdateUser(User user)
         {
-            var dbUser = _users.FirstOrDefault(x => x.Id == user.Id);
-            if(dbUser != null)
-            {
-                // _users
-                var index = _users.IndexOf(dbUser);
-                _users[index] = user;
-
-                return Ok(user);
-            }
-
-            return NotFound();
+            var successed = _userService.UpdateUser(user);
+            return StatusCode(successed ? 200 : 404);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(Guid id)
+        public IActionResult RemoveUser(Guid id)
         {
-            var dbUser = _users.FirstOrDefault(x => x.Id == id);
+            var user = _userService.RemoveUser(id);
 
-            if (dbUser != null)
-            {
-                _users.Remove(dbUser);
-
-                return Ok(dbUser);
-            }
-
-            return NotFound();
+            return StatusCode(user != null ? 200 : 404, user);
         }
     }
 }
