@@ -9,12 +9,12 @@ namespace CoreBL
 {
     public class UserService
     {
-        private UserRepository _userRepository;
+        private IUserRepository _userRepository;
         private IMapper _mapper;
 
         public UserService(
             IMapper mapper,
-            UserRepository userRepository)
+            IUserRepository userRepository)
         {
             _mapper = mapper;
             _userRepository = userRepository;

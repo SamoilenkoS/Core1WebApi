@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace CoreDAL
 {
-    public class UserRepository
+    public class UsersInListRepository : IUserRepository
     {
         private static List<UserDto> _users;
 
-        static UserRepository()
+        static UsersInListRepository()
         {
             _users = new List<UserDto>();
         }
@@ -45,7 +45,7 @@ namespace CoreDAL
         {
             var dbUser = GetById(user.Id);
 
-            if(dbUser != null)
+            if (dbUser != null)
             {
                 var index = _users.IndexOf(dbUser);
                 _users[index] = user;
