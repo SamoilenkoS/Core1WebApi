@@ -28,7 +28,7 @@ namespace CoreDAL
 
         public IEnumerable<UserDto> GetAll()
         {
-            return _dbContext.Users.ToList();
+            return _dbContext.Users.AsEnumerable();
         }
 
         public UserDto GetById(Guid id)
