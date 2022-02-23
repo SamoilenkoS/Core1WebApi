@@ -3,9 +3,6 @@ using CoreBL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Core1WebApi.Controllers
 {
@@ -67,15 +64,16 @@ namespace Core1WebApi.Controllers
         public IActionResult UpdateUser(User user)
         {
             var successed = _userService.UpdateUser(user);
+
             return StatusCode(successed ? 200 : 404);
         }
 
         [HttpDelete("{id}")]
         public IActionResult RemoveUser(Guid id)
         {
-            var user = _userService.RemoveUser(id);
+            var removed = _userService.RemoveUser(id);
 
-            return StatusCode(user != null ? 200 : 404, user);
+            return StatusCode(removed ? 200 : 404);
         }
     }
 }
