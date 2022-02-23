@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Warehouses]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+	[Address] NVARCHAR(50) NOT NULL
+)

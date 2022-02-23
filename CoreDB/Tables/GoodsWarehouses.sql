@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[GoodsWarehouses]
+(
+	[GoodId] UNIQUEIDENTIFIER NOT NULL,
+	[WarehouseId] UNIQUEIDENTIFIER NOT NULL,
+	[Count] INT NOT NULL DEFAULT(0),
+	CONSTRAINT FK_Goods_Id_GoodId FOREIGN KEY (GoodId)
+		REFERENCES Goods(Id)
+		ON DELETE CASCADE,
+	CONSTRAINT FK_Warehouses_Id_WarehouseId FOREIGN KEY (WarehouseId)
+		REFERENCES Warehouses(Id)
+		ON DELETE CASCADE,
+)
