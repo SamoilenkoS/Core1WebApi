@@ -7,6 +7,8 @@ namespace Core1WebApi.Models
     {
         public Guid Id { get; set; }
         [Required]
+        public string Login { get; set; }
+        [Required]
         [MinLength(2)]
         [MaxLength(20)]
         public string FirstName { get; set; }
@@ -15,6 +17,6 @@ namespace Core1WebApi.Models
         [MaxLength(20)]
         public string LastName { get; set; }
         [Required]
-        public string BirthDate { get; set; }
+        public string Password { get; set; }
     }
 }

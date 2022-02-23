@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace CoreDAL
 {
-    public class UsersInDBRepository : IUserRepository
+    public class UsersRepository : IUserRepository
     {
         private readonly EfCoreContext _dbContext;
 
-        public UsersInDBRepository(EfCoreContext dbContext)
+        public UsersRepository(EfCoreContext dbContext)
         {
             _dbContext = dbContext;
         }

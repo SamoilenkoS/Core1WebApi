@@ -1,13 +1,17 @@
 using CoreBL;
+using CoreBL.Models;
 using CoreBL.Profiles;
 using CoreDAL;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 
 namespace Core1WebApi
 {
@@ -24,10 +28,34 @@ namespace Core1WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserService>();
-            services.AddScoped<IUserRepository, UsersInDBRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUserRepository, UsersRepository>();
+            services.AddScoped<IAuthService, AuthService>();
 
             services.AddDbContext<EfCoreContext>(options
                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            var section = Configuration.GetSection(nameof(AuthOptions));
+            services.Configure<AuthOptions>(section);
+
+            var authOptions = section.Get<AuthOptions>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = authOptions.Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = authOptions.Audience,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey
+                            (Encoding.ASCII.GetBytes(authOptions.SecretKey)),
+                        ValidateIssuerSigningKey = true
+                    };
+                });
 
             var assemblies = new[]
             {
@@ -50,6 +78,7 @@ namespace Core1WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

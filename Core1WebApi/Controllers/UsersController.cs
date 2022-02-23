@@ -1,5 +1,6 @@
 ﻿using Core1WebApi.Models;
 using CoreBL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -42,12 +43,14 @@ namespace Core1WebApi.Controllers
             return BadRequest();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("all")]
         public IActionResult GetAllUsers()
         {
             return Ok(_userService.GetAllUsers());
         }
 
+        [Authorize(Roles = "User")]
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
