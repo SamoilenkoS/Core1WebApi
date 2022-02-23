@@ -32,13 +32,13 @@ namespace CoreDAL
             return _users.FirstOrDefault(x => x.Id == id);
         }
 
-        public UserDto RemoveById(Guid id)
+        public bool RemoveById(Guid id)
         {
             var entity = GetById(id);
 
             _users.Remove(entity);
 
-            return entity;
+            return entity != null;
         }
 
         public bool UpdateById(UserDto user)

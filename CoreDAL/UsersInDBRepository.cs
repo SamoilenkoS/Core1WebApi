@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoreDAL
 {
@@ -36,13 +34,11 @@ namespace CoreDAL
             return _dbContext.Users.Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public UserDto RemoveById(Guid id)
+        public bool RemoveById(Guid id)
         {
-            var user = GetById(id);
+            var user = new UserDto { Id = id };
             _dbContext.Users.Remove(user);
-            _dbContext.SaveChanges();
-
-            return user;
+            return _dbContext.SaveChanges() != 0;
         }
 
         public bool UpdateById(UserDto user)

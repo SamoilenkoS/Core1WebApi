@@ -46,11 +46,9 @@ namespace CoreBL
             return _mapper.Map<User>(dbUser);
         }
 
-        public User RemoveUser(Guid id)
+        public bool RemoveUser(Guid id)
         {
-            var dbUser = _userRepository.RemoveById(id);
-
-            return _mapper.Map<User>(dbUser);
+            return _userRepository.RemoveById(id);
         }
 
         public bool UpdateUser(User user)

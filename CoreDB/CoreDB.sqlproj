@@ -57,9 +57,15 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Post-Deployment Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Users.sql" />
-    <Build Include="Tables\Cities.sql" />
+    <Build Include="Tables\Goods.sql" />
+    <Build Include="Tables\Warehouses.sql" />
+    <Build Include="Tables\GoodsWarehouses.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Post-Deployment Scripts\PrefillData1.sql" />
   </ItemGroup>
 </Project>
